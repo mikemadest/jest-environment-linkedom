@@ -3,6 +3,8 @@
 
 This is mostly an experiment to see what I can get working, this is not usage in production or even in development actually since it's a WIP.
 
+Example of a simple project using this: https://github.com/mikemadest/example-linkedom
+
 ## 2. Why the hell
 
 After taking an interest in Linkedom (https://github.com/WebReflection/linkedom) I came upon [this discussion](https://github.com/WebReflection/linkedom/issues/50) and used [Stephen Harberman](https://github.com/stephenh) code as starting point ([this code](https://gist.github.com/stephenh/056a500708243e2ea43246c28d19d3ae)).
@@ -28,6 +30,13 @@ module.exports = {
   // ... you other configs ...
   testEnvironment: './linkedom/linkedom-environment.js',
 };
+```
+
+You can also update your package.json like:
+```javascript
+  "scripts": {
+    "test": "react-scripts test  --env=./jest-config/jest-environment-linkedom.js --watchAll=false",
+  },
 ```
 
 ## 4. Basic test example (jest + react testing library):
