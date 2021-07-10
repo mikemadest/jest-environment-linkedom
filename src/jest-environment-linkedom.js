@@ -19,8 +19,6 @@ class LinkedomEnvironment {
     );
 
     // linkedom don't define window.location
-    // window.location = { protocol: 'http' };
-
     if (!window.location) {
       Object.defineProperty(window, 'location', {
         value: { protocol: 'http' },

@@ -1,29 +1,36 @@
 # jest-environment-linkedom
+## 1. What is this
 
-*This is mostly an experiment to see what I can get working*
+This is mostly an experiment to see what I can get working, this is not usage in production or even in development actually since it's a WIP.
 
-After taking an interest in Linkedom
-https://github.com/WebReflection/linkedom
+## 2. Why the hell
 
-I came upon this discussion:
-https://github.com/WebReflection/linkedom/issues/50
+After taking an interest in Linkedom (https://github.com/WebReflection/linkedom) I came upon [this discussion](https://github.com/WebReflection/linkedom/issues/50) and used [Stephen Harberman](https://github.com/stephenh) code as starting point ([this code](https://gist.github.com/stephenh/056a500708243e2ea43246c28d19d3ae)).
 
-And using this as a base:
-https://gist.github.com/stephenh/056a500708243e2ea43246c28d19d3ae
+The goal was just to make basic tests pass.
 
-I tried to come up with some that would make my basic test pass and this is the result.
+## 3. I wanna play too
 
-After copying the files in a `linkedom` folder, update `jest.config.js` to:
+
+### 3.1 Add those dependencies to your package.json:
+
+```javascript
+    "linkedom": "^0.11.0",
+    "jest-fake-timers": "^1.0.2",
+    "jest-mock": "^27.0.6",
+    "jest-util": "^27.0.6",
+```
+
+
+### 3.2 After copying the files in a `linkedom` folder, update `jest.config.js` to whatever your path is to this file:
 ```javascript
 module.exports = {
   // ... you other configs ...
-  testEnvironment: '../../../config/jest/linkedom/linkedom-environment.js',
+  testEnvironment: './linkedom/linkedom-environment.js',
 };
 ```
-More info about testEnvironment: https://jestjs.io/docs/configuration#testenvironment-string
 
-
-Basic test example (jest + react testing library):
+## 4. Basic test example (jest + react testing library):
 
 ```javascript
 import React from 'react';
@@ -68,14 +75,16 @@ describe('Basic test', () => {
 });
 ```
 
-Addition:
-- the absence of window.location was causing a crash
+## 5. What was done
+
+- Added window.location to avoid crash
 - Axe test require `NamedNodeMap` which was undefined. Very crude "fix" just to avoid the crash (JSDOM as a full implementation but for now I'm skipping that)
-- testing library `toBeInTheDocument` (and probably other methods) uses `getRootNode` which was undefined, added a polyfill
+- testing library `toBeInTheDocument` (and probably other methods) uses `getRootNode` which was undefined, added a "polyfill"
 - Missing `getComputedStyle`, reported here too: https://githubmemory.com/repo/WebReflection/linkedom/issues/53
   So I added a "polyfill" which mostly avoid errors for now
   
-  
-State: 
+## 6. Status
+
 - render and content checking pass.
 - onClick test fail.
+
