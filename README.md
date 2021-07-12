@@ -1,9 +1,9 @@
 # jest-environment-linkedom
 ## 1. What is this
 
-This is mostly an experiment to see what I can get working, this is not usage in production or even in development actually since it's a WIP.
-
-Example of a simple project using this: https://github.com/mikemadest/example-linkedom
+This will help run Jest tests in the linkedom environment, based on https://jestjs.io/docs/next/configuration#testenvironment-string.
+Example of a working basic project: https://github.com/mikemadest/example-linkedom.
+This is an experiment to see what I can get working, WIP.
 
 ## 2. Why the hell
 
@@ -12,7 +12,6 @@ After taking an interest in Linkedom (https://github.com/WebReflection/linkedom)
 The goal was just to make basic tests pass.
 
 ## 3. I wanna play too
-
 
 ### 3.1 Add those dependencies to your package.json:
 
@@ -28,7 +27,7 @@ The goal was just to make basic tests pass.
 ```javascript
 module.exports = {
   // ... you other configs ...
-  testEnvironment: './linkedom/linkedom-environment.js',
+  testEnvironment: './linkedom/jest-environment-linkedom.js',
 };
 ```
 
@@ -70,7 +69,7 @@ describe('Basic test', () => {
   afterAll(cleanup);
 
   it('should render and find content', () => {
-    expect(screen.getByText('search')).toBeInTheDocument();
+    expect(screen.getByText(/search/i)).toBeInTheDocument();
     expect(screen.queryByText('blah')).not.toBeInTheDocument();
     expect(
       screen.getByRole('button', { name: 'click me!' }),
@@ -91,9 +90,23 @@ describe('Basic test', () => {
 - testing library `toBeInTheDocument` (and probably other methods) uses `getRootNode` which was undefined, added a "polyfill"
 - Missing `getComputedStyle`, reported here too: https://githubmemory.com/repo/WebReflection/linkedom/issues/53
   So I added a "polyfill" which mostly avoid errors for now
-  
+
+- extends jest-env-node to avoid reinventing the wheel and avoid setting global.RegExp as this is breaks instanceof.
+
+**More on that last one:**
+
+Problem is that Object in VM context are different distinct objects.
+References for that issue:
+https://github.com/jsdom/jsdom/compare/7.0.1...7.0.2 where jsdom avoided adding Date and RegExp to "this" for the same reason.
+
+Jest globals differ from Node globals:
+https://github.com/facebook/jest/issues/2549
+
+vm instanceof operator don't work as expected:
+https://github.com/nodejs/node-v0.x-archive/issues/1277
+
 ## 6. Status
 
 - render and content checking pass.
+- RegExp are now working
 - onClick test fail.
-

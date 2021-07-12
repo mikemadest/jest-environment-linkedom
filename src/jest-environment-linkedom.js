@@ -1,13 +1,15 @@
-/* eslint-disable import/no-extraneous-dependencies */
+
+/**
+ * jest environment setting to use linkedom for rendering
+ * 
+ * source:
+ * https://jestjs.io/docs/next/configuration#testenvironment-string
+ *  https://gist.github.com/stephenh/056a500708243e2ea43246c28d19d3ae
+ * */
 const { parseHTML } = require("linkedom");
 const NodeEnvironment = require("jest-environment-node");
 const getRootNode = require("./get-root-node-polyfill");
 const getComputedStyle = require("./get-computed-style-polyfill");
-
-/**
- * source:
- *  https://gist.github.com/stephenh/056a500708243e2ea43246c28d19d3ae
- * */
 
 class LinkedomEnvironment extends NodeEnvironment {
   constructor(config, options) {
@@ -17,7 +19,7 @@ class LinkedomEnvironment extends NodeEnvironment {
       '<!doctype html><html lang="en"><head /><body /></html>'
     );
 
-    // linkedom don't define window.location
+    // add missing content
     if (!dom.location) {
       Object.defineProperty(dom, "location", {
         value: { protocol: "http" },
