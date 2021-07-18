@@ -1,4 +1,5 @@
 # jest-environment-linkedom
+
 ## 1. What is this
 
 This will help run Jest tests in the linkedom environment, based on https://jestjs.io/docs/next/configuration#testenvironment-string.
@@ -109,4 +110,4 @@ https://github.com/nodejs/node-v0.x-archive/issues/1277
 
 - render and content checking pass.
 - RegExp are now working
-- onClick test fail.
+- onClick test fail: work in progress for a pull request to implement event bubbling in linkedom
