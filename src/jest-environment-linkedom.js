@@ -32,22 +32,11 @@ class LinkedomEnvironment extends NodeEnvironment {
       });
     }
 
-    if (!dom.Node.getRootNode) {
-      Object.defineProperty(dom.Node.prototype, "getRootNode", {
-        enumerable: false,
-        configurable: false,
-        value: getRootNode,
-      });
-    }
-
-    // not ideal but Axe needs it in an instanceof test and we just want to avoid an error for now
-    if (!dom.NamedNodeMap) {
-      Object.defineProperty(dom, "NamedNodeMap", {
-        value: function NamedNodeMap() {
-          throw new Error("Illegal constructor");
-        },
-      });
-    }
+    Object.defineProperty(dom.Node.prototype, "getRootNode", {
+      enumerable: false,
+      configurable: false,
+      value: getRootNode,
+    });
 
     this.global.window = dom;
     this.global.document = dom.document;
