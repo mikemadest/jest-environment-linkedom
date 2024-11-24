@@ -1,5 +1,9 @@
 # jest-environment-linkedom
 
+**Important**: this project was made as a learning experience and is not maintained anymore.
+If you want a simple config file to play with, this may be for you!
+If you need a functional config and ready to use in your project, I would recommend looking for other jest-environment-linkedom projects that may provide a better experience.
+
 ## 1. What is this
 
 This will help run Jest tests in the linkedom environment, based on https://jestjs.io/docs/next/configuration#testenvironment-string.
@@ -23,8 +27,8 @@ The goal was just to make basic tests pass.
     "jest-util": "^27.0.6",
 ```
 
-
 ### 3.2 After copying the files in a `linkedom` folder, update `jest.config.js` to whatever your path is to this file:
+
 ```javascript
 module.exports = {
   // ... you other configs ...
@@ -33,6 +37,7 @@ module.exports = {
 ```
 
 You can also update your package.json like:
+
 ```javascript
   "scripts": {
     "test": "react-scripts test  --env=./jest-config/jest-environment-linkedom.js --watchAll=false",
@@ -43,12 +48,7 @@ You can also update your package.json like:
 
 ```javascript
 import React from 'react';
-import {
-  cleanup,
-  screen,
-  render,
-  fireEvent,
-} from '@testing-library/react/pure';
+import {cleanup, screen, render, fireEvent} from '@testing-library/react/pure';
 
 describe('Basic test', () => {
   const mockedHandleClick = jest.fn().mockImplementation(() => {
@@ -63,7 +63,7 @@ describe('Basic test', () => {
         <button type="button" onClick={mockedHandleClick}>
           click me!
         </button>
-      </div>,
+      </div>
     );
   });
 
@@ -72,13 +72,11 @@ describe('Basic test', () => {
   it('should render and find content', () => {
     expect(screen.getByText(/search/i)).toBeInTheDocument();
     expect(screen.queryByText('blah')).not.toBeInTheDocument();
-    expect(
-      screen.getByRole('button', { name: 'click me!' }),
-    ).toBeInTheDocument();
+    expect(screen.getByRole('button', {name: 'click me!'})).toBeInTheDocument();
   });
 
   it('should click the button', () => {
-    fireEvent.click(screen.getByRole('button', { name: 'click me!' }));
+    fireEvent.click(screen.getByRole('button', {name: 'click me!'}));
     expect(mockedHandleClick).toHaveBeenCalled();
   });
 });

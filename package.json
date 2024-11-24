@@ -1,0 +1,26 @@
+{
+  "name": "@mikemadest/jest-environment-linkedom",
+  "version": "0.0.1",
+  "description": "Provides a simple basic config file for using linkedom with Jest in a project, instead of jsdom.",
+  "main": "jest-environment-linkedom.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mikemadest/jest-environment-linkedom.git"
+  },
+  "keywords": [
+    "jest",
+    "linkedom",
+    "jsdom",
+    "unit",
+    "tests"
+  ],
+  "author": "Mikemadest",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mikemadest/jest-environment-linkedom/issues"
+  },
+  "homepage": "https://github.com/mikemadest/jest-environment-linkedom#readme"
+}
