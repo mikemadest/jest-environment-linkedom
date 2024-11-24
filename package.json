@@ -1,6 +1,6 @@
 {
   "name": "@mikemadest/jest-environment-linkedom",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Provides a simple basic config file for using linkedom with Jest in a project, instead of jsdom.",
   "main": "jest-environment-linkedom.js",
   "scripts": {
